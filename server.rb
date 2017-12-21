@@ -10,6 +10,8 @@ class Restaurant
 	include Mongoid::Document
 
 	field :name, type: String
+
+	scope :name, -> (name) { where(name: /^#{name}/i)}
 end
 
 # Endpoints
@@ -23,6 +25,12 @@ namespace '/api/v1' do
 	end
 
 	get '/restaurants' do
-		Restaurant.all.to_json
+		restaurants = Restaurant.all
+
+		[:name].each do |filter|
+			restaurants = restaurants.send(filter, params[filter]) if params[filter]
+		end
+
+		restaurants.to_json
 	end
 end
