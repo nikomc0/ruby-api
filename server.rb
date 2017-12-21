@@ -47,4 +47,10 @@ namespace '/api/v1' do
 
 		restaurants.map { |restaurant| RestaurantSerializer.new(restaurant) }.to_json
 	end
+
+	get '/restaurants/:id' do |id|
+		restaurant = Restaurant.where(id: id).first
+   	halt(404, { message:'Book Not Found'}.to_json) unless restaurant
+		RestaurantSerializer.new(restaurant).to_json
+	end
 end
