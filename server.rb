@@ -14,6 +14,20 @@ class Restaurant
 	scope :name, -> (name) { where(name: /^#{name}/i)}
 end
 
+# Serializers
+class RestaurantSerializer
+	def initialize(restaurant)
+		@restaurant = restaurant
+	end
+
+	def as_json(*)
+		data = {
+			id: @restaurant.id.to_s,
+			name: @restaurant.name
+		}
+	end
+end
+
 # Endpoints
 get '/' do
 	'Welcome to On My Wait List'
@@ -31,6 +45,6 @@ namespace '/api/v1' do
 			restaurants = restaurants.send(filter, params[filter]) if params[filter]
 		end
 
-		restaurants.to_json
+		restaurants.map { |restaurant| RestaurantSerializer.new(restaurant) }.to_json
 	end
 end
