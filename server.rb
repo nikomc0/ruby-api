@@ -50,7 +50,7 @@ namespace '/api/v1' do
 
 	get '/restaurants/:id' do |id|
 		restaurant = Restaurant.where(id: id).first
-   	halt(404, { message:'Book Not Found'}.to_json) unless restaurant
+    halt(404, { message:'Book Not Found'}.to_json) unless restaurant
 		RestaurantSerializer.new(restaurant).to_json
 	end
 end
