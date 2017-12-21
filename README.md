@@ -5,9 +5,9 @@ restaurants in their area to put their names down on the waitlist before leaving
 
 ## Dependencies
 
-gem 'sinatra'
-gem 'sinatra-contrib'
-gem 'mongoid'
+- gem 'sinatra'
+- gem 'sinatra-contrib'
+- gem 'mongoid'
 
 ### Scoping by name by default
 To allow for easy search by name which is case insensitive, and allows for partials
