@@ -18,4 +18,11 @@ get '/' do
 end
 
 namespace '/api/v1' do
+	before do 
+		content_type 'application/json'
+	end
+
+	get '/restaurants' do
+		Restaurant.all.to_json
+	end
 end
