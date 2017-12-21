@@ -45,7 +45,7 @@ namespace '/api/v1' do
 			restaurants = restaurants.send(filter, params[filter]) if params[filter]
 		end
 
-		restaurants.map { |restaurant| RestaurantSerializer.new(restaurant) }.to_json
+		puts restaurants.map { |restaurant| RestaurantSerializer.new(restaurant) }.to_json
 	end
 
 	get '/restaurants/:id' do |id|
